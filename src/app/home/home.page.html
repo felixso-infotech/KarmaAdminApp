@@ -1,3 +1,4 @@
+
 <ion-header>
   <ion-toolbar>
     <ion-buttons slot="start">
@@ -12,49 +13,78 @@
 <ion-content>
   <form #form="ngForm" (ngSubmit)="register(form)" method="post">
     <ion-item>
-      <ion-label position="floating">Title</ion-label>
+      <ion-label position="fixed">Title</ion-label>
       <ion-input type="text" ngModel name="title"></ion-input>
     </ion-item>
 
     <ion-item>
-      <ion-label position="floating">Description</ion-label>
+      <ion-label position="fixed">Description</ion-label>
       <ion-input type="text" ngModel name="description"></ion-input>
     </ion-item>
 
     <ion-item>
-      <ion-label position="floating">Success Message</ion-label>
+      <ion-label position="fixed">Success Message</ion-label>
       <ion-input type="text" ngModel name="success_message"></ion-input>
     </ion-item>
 
     <ion-item>
-      <ion-label position="floating">Type</ion-label>
+      <ion-label position="fixed">Type</ion-label>
       <ion-select>
-        <ion-select-option>Brown</ion-select-option>
-        <ion-select-option>Blonde</ion-select-option>
-        <ion-select-option>Black</ion-select-option>
+        <ion-select-option value="brown">Brown</ion-select-option>
+        <ion-select-option value="black">Black</ion-select-option>
       </ion-select>
     </ion-item>
 
     <ion-item>
-      <ion-label position="floating">Proof Type</ion-label>
+      <ion-label position="fixed">Proof Type</ion-label>
       <ion-input type="text" ngModel name="proof_type"></ion-input>
+      <ion-select>
+        <ion-select-option value="brown">Brown</ion-select-option>
+        <ion-select-option value="black">Black</ion-select-option>
+      </ion-select>
     </ion-item>
 
     <ion-item>
-      <ion-label position="floating">Number of Pages</ion-label>
+      <ion-label>Multiple Proofs Required</ion-label>
+      <ion-checkbox color="dark" checked="true"></ion-checkbox>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="fixed">Number of Pages</ion-label>
       <ion-input type="text" ngModel name="number_of_pages"></ion-input>
+      <ion-select>
+        <ion-select-option value='1'>1</ion-select-option>
+        <ion-select-option value='2'>2</ion-select-option>
+        <ion-select-option value='3'>3</ion-select-option>
+      </ion-select>
     </ion-item>
 
-    <ion-item>
-      <ion-label position="floating">Story</ion-label>
-      <ion-input type="text" ngModel name="story"></ion-input>
-    </ion-item>
 
-    <ion-item>
-      <ion-label position="floating">Image</ion-label>
-      <ion-input type="text" ngModel name="image"></ion-input>
-    </ion-item>
-
+  <ion-label>Dimensions</ion-label>
+    <ion-list>
+      <ion-item>
+        <ion-label>Physical</ion-label>
+        <ion-checkbox color="primary">Hai</ion-checkbox>
+      </ion-item>
+    </ion-list>
+    <ion-list>
+      <ion-item>
+        <ion-label>Mental</ion-label>
+        <ion-checkbox color="primary">Hai</ion-checkbox>
+      </ion-item>
+    </ion-list>
+    <ion-list>
+      <ion-item>
+        <ion-label>Social</ion-label>
+        <ion-checkbox color="primary">Hai</ion-checkbox>
+      </ion-item>
+    </ion-list>
+    <ion-list>
+      <ion-item>
+        <ion-label>Spiritual</ion-label>
+        <ion-checkbox color="primary">Hai</ion-checkbox>
+      </ion-item>
+    </ion-list>
     <ion-button type="submit" expand="full" color="danger">Save</ion-button>
   </form>
 </ion-content>

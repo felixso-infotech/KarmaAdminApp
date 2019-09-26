@@ -9,4 +9,11 @@ export class HomePage {
 
   constructor() {}
 
+     public form = [
+          { val: 'Pepperoni', isChecked: true },
+          { val: 'Sausage', isChecked: false },
+          { val: 'Mushroom', isChecked: false }
+        ];
+
+
 }
