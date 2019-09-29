@@ -15,5 +15,4 @@ export class HomePage {
           { val: 'Mushroom', isChecked: false }
         ];
 
-
 }

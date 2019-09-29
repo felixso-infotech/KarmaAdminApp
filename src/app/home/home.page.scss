@@ -2,3 +2,36 @@
   max-height: 35vh;
   overflow: hidden;
 }
+
+.my-checkbox {
+    display: flex;
+    align-items: left;
+}
+.my-checkbox-style {
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 1;
+    opacity: 0;
+ }
+
+body {
+    text-align: center;
+}
+form {
+    display: inline-block;
+}
+
+ion-content {
+    position: relative;
+    display: block;
+}
+.slide-zoom {
+    height: 100%;
+    text-align: center;
+}
+.myClass {
+    background-color: lightyellow;
+    height: 100%;
+    width: 100%;
+}
