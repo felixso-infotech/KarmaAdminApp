@@ -11,71 +11,61 @@
 </ion-header>
 
 
-<ion-content fullscreen>
-  <div>
-  <form #form="ngForm" (ngSubmit)="register(form)" method="post">
-    <ion-item>
-      <ion-label position="fixed">Title</ion-label>
-      <ion-input type="text" ngModel name="title"></ion-input>
-    </ion-item>
-
-    <ion-item>
-      <ion-label position="fixed">Description</ion-label>
-      <ion-input type="text" ngModel name="description"></ion-input>
-    </ion-item>
-
-    <ion-item>
-      <ion-label position="fixed">Success Message</ion-label>
-      <ion-input type="text" ngModel name="success_message"></ion-input>
-    </ion-item>
-
-    <ion-item>
-      <ion-label position="fixed">Type</ion-label>
-      <ion-select>
-        <ion-select-option value="brown">Brown</ion-select-option>
-        <ion-select-option value="black">Black</ion-select-option>
-      </ion-select>
-    </ion-item>
-
-    <ion-item>
-      <ion-label position="fixed">Proof Type</ion-label>
-      <ion-input type="text" ngModel name="proof_type"></ion-input>
-      <ion-select>
-        <ion-select-option value="brown">Brown</ion-select-option>
-        <ion-select-option value="black">Black</ion-select-option>
-      </ion-select>
-    </ion-item>
-
-    <ion-item>
-      <ion-label>Multiple Proofs Required</ion-label>
-      <ion-checkbox color="dark" checked="true"></ion-checkbox>
-    </ion-item>
-
-    <ion-item>
-      <ion-label position="fixed">Number of Pages</ion-label>
-      <ion-input type="text" ngModel name="number_of_pages"></ion-input>
-      <ion-select>
-        <ion-select-option value='1'>1</ion-select-option>
-        <ion-select-option value='2'>2</ion-select-option>
-        <ion-select-option value='3'>3</ion-select-option>
-      </ion-select>
-    </ion-item>
+<ion-content>
+  <ion-grid>
+ <ion-row>
+     <ion-col offset-md="2" offset="1" size-lg="6" size-md="8" size="10">
+         <ion-item>
+             <ion-label position="fixed">Title</ion-label>
+             <ion-textarea></ion-textarea>
+             <ion-input type="text" [(ngModel)]="title"></ion-input>
+         </ion-item>
 
 
-    <ion-item>
-    <ion-label>Dimensions</ion-label>
-    <div>
-      <div class="my-checkbox">
-        <ion-list>
-          <ion-item *ngFor="let entry of form">
-            <ion-label>{{entry.val}}</ion-label>
-            <ion-checkbox slot="end" [(ngModel)]="entry.isChecked"></ion-checkbox>
-          </ion-item>
-        </ion-list>
-      </div>
-    </div>
-    </ion-item>
-    <ion-button type="submit" expand="full" color="danger">Save</ion-button>
-  </form>
-  </div>
+
+         <ion-item>
+             <ion-label position="fixed">Description</ion-label>
+             <ion-input type="text" [(ngModel)]="description"></ion-input>
+         </ion-item>
+
+         <ion-item>
+             <ion-label position="fixed">Success Message</ion-label>
+             <ion-input type="text" [(ngModel)]="successMessage"></ion-input>
+         </ion-item>
+
+         <ion-item>
+             <ion-label position="fixed">Type</ion-label>
+             <ion-select>
+                 <ion-select-option value="brown">Brown</ion-select-option>
+                 <ion-select-option value="black">Black</ion-select-option>
+             </ion-select>
+         </ion-item>
+
+         <ion-item>
+             <ion-label position="fixed">Proof Type</ion-label>
+             <ion-select>
+                 <ion-select-option value="brown">Brown</ion-select-option>
+                 <ion-select-option value="black">Black</ion-select-option>
+             </ion-select>
+         </ion-item>
+
+         <ion-item>
+             <ion-label position="fixed">Number of Pages</ion-label>
+             <ion-input type="text" ngModel name="number_of_pages"></ion-input>
+             <ion-select>
+                 <ion-select-option value='1'>1</ion-select-option>
+                 <ion-select-option value='2'>2</ion-select-option>
+                 <ion-select-option value='3'>3</ion-select-option>
+             </ion-select>
+         </ion-item>
+
+         <ion-item lines="none">
+             <ion-button size="default" (click)="createNewActivity()">
+                 Create
+             </ion-button>
+         </ion-item>
+
+     </ion-col>
+   </ion-row>
+  </ion-grid>
 </ion-content>
