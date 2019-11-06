@@ -12,52 +12,84 @@
 
 
 <ion-content>
-  <ion-grid>
+  <ion-grid> 
  <ion-row>
-     <ion-col offset-md="2" offset="1" size-lg="6" size-md="8" size="10">
+     <ion-col offset-md="1" offset="1" size-lg="8" size-md="6" size="15">
          <ion-item>
-             <ion-label position="fixed">Title</ion-label>
-             <ion-textarea></ion-textarea>
-             <ion-input type="text" [(ngModel)]="title"></ion-input>
-         </ion-item>
-
-
-
-         <ion-item>
-             <ion-label position="fixed">Description</ion-label>
-             <ion-input type="text" [(ngModel)]="description"></ion-input>
+             <ion-label>Title</ion-label>
+             <ion-input type="text" [(ngModel)]="activityAggregate.activityDTO.title"></ion-input>
          </ion-item>
 
          <ion-item>
-             <ion-label position="fixed">Success Message</ion-label>
-             <ion-input type="text" [(ngModel)]="successMessage"></ion-input>
+             <ion-label>Description</ion-label>
+             <ion-input type="text" [(ngModel)]="activityAggregate.activityDTO.description"></ion-input>
          </ion-item>
 
          <ion-item>
-             <ion-label position="fixed">Type</ion-label>
-             <ion-select>
+             <ion-label>Success Message</ion-label>
+             <ion-input type="text" [(ngModel)]="activityAggregate.activityDTO.successMessage"></ion-input>
+         </ion-item>
+
+         <ion-item>
+            <ion-label>Multiple Proofs Required</ion-label>
+            <ion-checkbox [(ngModel)]="activityAggregate.activityDTO.isMultipleProofsRequired"></ion-checkbox>
+        </ion-item>
+
+         <ion-item>
+             <ion-label>Type</ion-label>
+             <ion-select [(ngModel)]="activityAggregate.activityDTO.type">
                  <ion-select-option value="brown">Brown</ion-select-option>
                  <ion-select-option value="black">Black</ion-select-option>
              </ion-select>
          </ion-item>
 
          <ion-item>
-             <ion-label position="fixed">Proof Type</ion-label>
-             <ion-select>
+             <ion-label>Proof Type</ion-label>
+             <ion-select [(ngModel)]="activityAggregate.activityDTO.proofType">
                  <ion-select-option value="brown">Brown</ion-select-option>
                  <ion-select-option value="black">Black</ion-select-option>
              </ion-select>
          </ion-item>
 
          <ion-item>
-             <ion-label position="fixed">Number of Pages</ion-label>
-             <ion-input type="text" ngModel name="number_of_pages"></ion-input>
-             <ion-select>
-                 <ion-select-option value='1'>1</ion-select-option>
-                 <ion-select-option value='2'>2</ion-select-option>
-                 <ion-select-option value='3'>3</ion-select-option>
+             <ion-label>Number of Pages</ion-label>
+             <ion-select [(ngModel)]="activityAggregate.activityDTO.noOfPages" (ionChange)="setActivityPagesDataSize()">
+                 <ion-select-option value=1>1</ion-select-option>
+                 <ion-select-option value=2>2</ion-select-option>
+                 <ion-select-option value=3>3</ion-select-option>
              </ion-select>
          </ion-item>
+
+         <div>
+        <span *ngFor="let dimension of dimensions">
+         <ion-item style="width: fit-content"> 
+            <ion-label>Dimensions</ion-label>
+                    <ion-checkbox [(ngModel)]="dimension.isChecked"></ion-checkbox><ion-label>{{dimension.val}}</ion-label>
+        </ion-item>
+        </span>
+        </div>
+
+        <ion-item>
+            <ion-label>Challenge</ion-label>
+            <ion-select [(ngModel)]="activityAggregate.activityDTO.challengeId">
+                <ion-select-option value=1>Challenge 1</ion-select-option>
+                <ion-select-option value=2>Challenge 2</ion-select-option>
+                <ion-select-option value=3>Challenge 3</ion-select-option>
+            </ion-select>
+        </ion-item>
+        <div *ngIf="activityAggregate.activityDTO.noOfPages != undefined">
+            <div *ngFor="let a of activityAggregate.introductionStories;let i=index">
+                <ion-item>
+                    <ion-label>Story</ion-label>
+                    <ion-input type="text" [(ngModel)]="activityAggregate.introductionStories[i].story"></ion-input>
+                </ion-item>
+
+                <ion-item>
+                    <ion-label>Image</ion-label>
+                    <ion-input type="file" accept="image/*" (change)="onSelectFile($event,i)"></ion-input>
+                </ion-item>
+            </div>
+        </div>
 
          <ion-item lines="none">
              <ion-button size="default" (click)="createNewActivity()">
