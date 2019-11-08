@@ -16,20 +16,17 @@ export class HomePage {
 
   activityAggregate: ActivityAggregate={
     activityDTO:{
-      dimensions:[{   
-      }],
+      dimensions:[],
     },
     introductionStories : [{}]
   };
 
 
-
-  dimensionDTO:DimensionDTO={};
   dimensions = [
-    { val: 'PhysicalDimension', isChecked: false },
-    { val: 'SpiritualDimension', isChecked: false },
-    { val: 'MentalDimension', isChecked: false },
-    { val: 'SocialDimension', isChecked: false}
+    { showValue: 'PhysicalDimension',val:1, isChecked: false },
+    { showValue: 'SpiritualDimension',val:2, isChecked: false },
+    { showValue: 'MentalDimension',val:3, isChecked: false },
+    { showValue: 'SocialDimension',val:4, isChecked: false}
   ];
 
 
@@ -37,21 +34,20 @@ export class HomePage {
 
 
   createNewActivity(){
+    this.activityAggregate.activityDTO.createdDate=this.getCurrentTime(); 
     this.dimensions.forEach((dimension)=>{
       if(dimension.isChecked==true){
         let d: DimensionDTO={
-          name:dimension.val
+          id:dimension.val
         }
         this.activityAggregate.activityDTO.dimensions.push(d);
       }
     });
-
+ 
+    console.log("%%%%%%",this.activityAggregate);
     this.gatewayAggregateCommandResourceService.createActivityUsingPOST(this.activityAggregate).subscribe(
       (res)=>{console.log("***********Respose******",res)});
-    console.log("&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&");
-      console.log("###########",this.activityAggregate);
-    console.log("&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&");
-
+    
   }
 
   setActivityPagesDataSize(){
@@ -89,6 +85,21 @@ export class HomePage {
 
     freader.readAsDataURL(this.fileToUpload);
 
+}
+
+getCurrentTime():string{
+  let currentTime=new Date();
+  let offset=currentTime.getTimezoneOffset();
+  var hours=(Math.floor(offset / 60)).toString().replace("-","");
+  var minutes=(offset % 60).toString().replace("-","");
+  console.log("+++++++  "+(currentTime.toISOString()).split("Z")[0]+"+0"+hours+":"+minutes);
+
+  if(offset<0){
+    return (currentTime.toISOString()).split("Z")[0]+"+0"+hours+":"+minutes;
+  }
+  else{
+     return (currentTime.toISOString()).split("Z")[0]+"-0"+hours+":"+minutes;
+  }  
 }
 
 

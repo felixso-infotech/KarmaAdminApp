@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { GatewayAggregateCommandResourceService, GatewayAggregateQueryResourceService } from '../api/services';
+import { ActivityDTO } from '../api/models';
 
 @Component({
   selector: 'app-list',
@@ -6,6 +8,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['list.page.scss']
 })
 export class ListPage implements OnInit {
+  activityDTO: ActivityDTO[]=[];
   private selectedItem: any;
   private icons = [
     'flask',
@@ -20,7 +23,7 @@ export class ListPage implements OnInit {
     'build'
   ];
   public items: Array<{ title: string; note: string; icon: string }> = [];
-  constructor() {
+  constructor(public gatewayAggregateQueryResourceService: GatewayAggregateQueryResourceService) {
     for (let i = 1; i < 11; i++) {
       this.items.push({
         title: 'Item ' + i,
@@ -31,6 +34,7 @@ export class ListPage implements OnInit {
   }
 
   ngOnInit() {
+    this.gatewayAggregateQueryResourceService.getAllActivitiesUsingGET().subscribe((result)=>{this.activityDTO=result})
   }
   // add back when alpha.4 is out
   // navigate(item) {
