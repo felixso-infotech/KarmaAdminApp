@@ -77,9 +77,9 @@
         <ion-item>
             <ion-label>Challenge</ion-label>
             <ion-select [(ngModel)]="activityAggregate.activityDTO.challengeId">
-                <ion-select-option value=1>Challenge 1</ion-select-option>
-                <ion-select-option value=2>Challenge 2</ion-select-option>
-                <ion-select-option value=3>Challenge 3</ion-select-option>
+                <ion-select-option *ngFor="let a of challengeDTOs" [value]="a.id">{{a.name}}</ion-select-option>
+                <!-- <ion-select-option value=2>Challenge 2</ion-select-option>
+                <ion-select-option value=3>Challenge 3</ion-select-option> -->
             </ion-select>
         </ion-item>
         <div *ngIf="activityAggregate.activityDTO.noOfPages != undefined">

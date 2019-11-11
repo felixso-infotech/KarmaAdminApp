@@ -8,6 +8,7 @@ import { Observable as __Observable } from 'rxjs';
 import { map as __map, filter as __filter } from 'rxjs/operators';
 
 import { ActivityDTO } from '../models/activity-dto';
+import { ChallengeDTO } from '../models/challenge-dto';
 import { CommittedActivityAggregate } from '../models/committed-activity-aggregate';
 import { DimensionDTO } from '../models/dimension-dto';
 import { RegisteredUserAggregate } from '../models/registered-user-aggregate';
@@ -20,6 +21,7 @@ import { RegisteredUserAggregate } from '../models/registered-user-aggregate';
 })
 class GatewayAggregateQueryResourceService extends __BaseService {
   static readonly getAllActivitiesUsingGETPath = '/api/query/activities';
+  static readonly getAllChallengesUsingGETPath = '/api/query/challenges';
   static readonly getAllCommittedActivitiesByStatusUsingGETPath = '/api/query/committed-activities/{status}';
   static readonly getAllDimensionsUsingGETPath = '/api/query/dimensions';
   static readonly getAllEnumProofTypesUsingGETPath = '/api/query/enums/proof-type';
@@ -64,6 +66,93 @@ class GatewayAggregateQueryResourceService extends __BaseService {
   getAllActivitiesUsingGET(): __Observable<Array<ActivityDTO>> {
     return this.getAllActivitiesUsingGETResponse().pipe(
       __map(_r => _r.body as Array<ActivityDTO>)
+    );
+  }
+
+  /**
+   * @param params The `GatewayAggregateQueryResourceService.GetAllChallengesUsingGETParams` containing the following parameters:
+   *
+   * - `unpaged`:
+   *
+   * - `sort.unsorted`:
+   *
+   * - `sort.sorted`:
+   *
+   * - `sort`: Sorting criteria in the format: property(,asc|desc). Default sort order is ascending. Multiple sort criteria are supported.
+   *
+   * - `size`: Size of a page
+   *
+   * - `paged`:
+   *
+   * - `pageSize`:
+   *
+   * - `pageNumber`:
+   *
+   * - `page`: Page number of the requested page
+   *
+   * - `offset`:
+   *
+   * @return OK
+   */
+  getAllChallengesUsingGETResponse(params: GatewayAggregateQueryResourceService.GetAllChallengesUsingGETParams): __Observable<__StrictHttpResponse<Array<ChallengeDTO>>> {
+    let __params = this.newParams();
+    let __headers = new HttpHeaders();
+    let __body: any = null;
+    if (params.unpaged != null) __params = __params.set('unpaged', params.unpaged.toString());
+    if (params.sortUnsorted != null) __params = __params.set('sort.unsorted', params.sortUnsorted.toString());
+    if (params.sortSorted != null) __params = __params.set('sort.sorted', params.sortSorted.toString());
+    (params.sort || []).forEach(val => {if (val != null) __params = __params.append('sort', val.toString())});
+    if (params.size != null) __params = __params.set('size', params.size.toString());
+    if (params.paged != null) __params = __params.set('paged', params.paged.toString());
+    if (params.pageSize != null) __params = __params.set('pageSize', params.pageSize.toString());
+    if (params.pageNumber != null) __params = __params.set('pageNumber', params.pageNumber.toString());
+    if (params.page != null) __params = __params.set('page', params.page.toString());
+    if (params.offset != null) __params = __params.set('offset', params.offset.toString());
+    let req = new HttpRequest<any>(
+      'GET',
+      this.rootUrl + `/api/query/challenges`,
+      __body,
+      {
+        headers: __headers,
+        params: __params,
+        responseType: 'json'
+      });
+
+    return this.http.request<any>(req).pipe(
+      __filter(_r => _r instanceof HttpResponse),
+      __map((_r) => {
+        return _r as __StrictHttpResponse<Array<ChallengeDTO>>;
+      })
+    );
+  }
+  /**
+   * @param params The `GatewayAggregateQueryResourceService.GetAllChallengesUsingGETParams` containing the following parameters:
+   *
+   * - `unpaged`:
+   *
+   * - `sort.unsorted`:
+   *
+   * - `sort.sorted`:
+   *
+   * - `sort`: Sorting criteria in the format: property(,asc|desc). Default sort order is ascending. Multiple sort criteria are supported.
+   *
+   * - `size`: Size of a page
+   *
+   * - `paged`:
+   *
+   * - `pageSize`:
+   *
+   * - `pageNumber`:
+   *
+   * - `page`: Page number of the requested page
+   *
+   * - `offset`:
+   *
+   * @return OK
+   */
+  getAllChallengesUsingGET(params: GatewayAggregateQueryResourceService.GetAllChallengesUsingGETParams): __Observable<Array<ChallengeDTO>> {
+    return this.getAllChallengesUsingGETResponse(params).pipe(
+      __map(_r => _r.body as Array<ChallengeDTO>)
     );
   }
 
@@ -273,6 +362,34 @@ class GatewayAggregateQueryResourceService extends __BaseService {
 }
 
 module GatewayAggregateQueryResourceService {
+
+  /**
+   * Parameters for getAllChallengesUsingGET
+   */
+  export interface GetAllChallengesUsingGETParams {
+    unpaged?: boolean;
+    sortUnsorted?: boolean;
+    sortSorted?: boolean;
+
+    /**
+     * Sorting criteria in the format: property(,asc|desc). Default sort order is ascending. Multiple sort criteria are supported.
+     */
+    sort?: Array<string>;
+
+    /**
+     * Size of a page
+     */
+    size?: number;
+    paged?: boolean;
+    pageSize?: number;
+    pageNumber?: number;
+
+    /**
+     * Page number of the requested page
+     */
+    page?: number;
+    offset?: number;
+  }
 }
 
 export { GatewayAggregateQueryResourceService }

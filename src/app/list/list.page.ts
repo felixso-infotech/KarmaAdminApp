@@ -8,9 +8,9 @@ import { ActivityDTO } from '../api/models';
   styleUrls: ['list.page.scss']
 })
 export class ListPage implements OnInit {
-  activityDTO: ActivityDTO[]=[];
-  private selectedItem: any;
-  private icons = [
+  activityDTOs: ActivityDTO[]=[];
+  /* private selectedItem: any; */
+  /* private icons = [
     'flask',
     'wifi',
     'beer',
@@ -21,20 +21,20 @@ export class ListPage implements OnInit {
     'boat',
     'bluetooth',
     'build'
-  ];
+  ]; */
   public items: Array<{ title: string; note: string; icon: string }> = [];
   constructor(public gatewayAggregateQueryResourceService: GatewayAggregateQueryResourceService) {
-    for (let i = 1; i < 11; i++) {
+    /* for (let i = 1; i < 11; i++) {
       this.items.push({
         title: 'Item ' + i,
         note: 'This is item #' + i,
         icon: this.icons[Math.floor(Math.random() * this.icons.length)]
       });
-    }
+    } */
   }
 
   ngOnInit() {
-    this.gatewayAggregateQueryResourceService.getAllActivitiesUsingGET().subscribe((result)=>{this.activityDTO=result})
+    this.gatewayAggregateQueryResourceService.getAllActivitiesUsingGET().subscribe((result)=>{this.activityDTOs=result})
   }
   // add back when alpha.4 is out
   // navigate(item) {

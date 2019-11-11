@@ -11,12 +11,13 @@
 
 <ion-content>
   <ion-list>
-    <ion-item *ngFor="let item of items">
-      <ion-icon [name]="item.icon" slot="start"></ion-icon>
-      {{item.title}}
-      <div class="item-note" slot="end">
-        {{item.note}}
-      </div>
+    <ion-item *ngFor="let activity of activityDTOs;let i=index">
+        <div class="item-note" slot="start">
+        {{i}}. {{activity.title}}
+        </div>
+        <div class="item-note" slot="end">
+        {{activity.description}}
+        </div>
     </ion-item>
   </ion-list>
   <!--

@@ -1,13 +1,13 @@
-import { Component } from '@angular/core';
-import { ActivityAggregate, DimensionDTO } from '../api/models';
+import { Component, OnInit } from '@angular/core';
+import { ActivityAggregate, DimensionDTO, ChallengeDTO } from '../api/models';
 import {IntroductionStoryDTO} from '../api/models';
-import { GatewayAggregateCommandResourceService } from '../api/services';
+import { GatewayAggregateCommandResourceService, GatewayAggregateQueryResourceService } from '../api/services';
 @Component({
   selector: 'app-home',
   templateUrl: 'home.page.html',
   styleUrls: ['home.page.scss'],
 })
-export class HomePage {
+export class HomePage implements OnInit{
   activityPagesData: number[]=[];
 
   fileToUpload:File;
@@ -21,6 +21,8 @@ export class HomePage {
     introductionStories : [{}]
   };
 
+  challengeDTOs: ChallengeDTO[]=[];
+
 
   dimensions = [
     { showValue: 'PhysicalDimension',val:1, isChecked: false },
@@ -30,8 +32,17 @@ export class HomePage {
   ];
 
 
-  constructor(public gatewayAggregateCommandResourceService:GatewayAggregateCommandResourceService) {}
+  constructor(public gatewayAggregateCommandResourceService:GatewayAggregateCommandResourceService,
+    public gatewayAggregateQueryResourceService: GatewayAggregateQueryResourceService) {
 
+  }
+
+  ngOnInit(){
+    this.gatewayAggregateQueryResourceService.getAllChallengesUsingGET({unpaged: true,
+      sortUnsorted: true,
+      sortSorted: true}).subscribe((result)=>{this.challengeDTOs=result});
+   
+  }
 
   createNewActivity(){
     this.activityAggregate.activityDTO.createdDate=this.getCurrentTime(); 
